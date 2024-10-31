@@ -3,11 +3,17 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import React from 'react'
 import GlowingImage from './components/glowingimage'
+import GlowingText from './components/glowingText'
 import './App.css'
 
 function App() {
-	const [count, setCount] = useState(0)
+	const [count, setCount] = useState(Number.parseInt(localStorage.getItem('count')) || 0)
 
+	//watch for changes in the count
+	useEffect(() => {
+		//store the count in local storage
+		localStorage.setItem('count', count)
+	}, [count])
 
 	return (
 		<>
@@ -23,7 +29,7 @@ function App() {
 					</a>
 				</div>
 			</div>
-			<h1>Vite + React</h1>
+			<GlowingText><h1 className='textColor'>Vite + React</h1></GlowingText>
 			<div className="card">
 				<button onClick={() => setCount((count) => count + 1)}>
 					count is {count}
